@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Ryota Arai"]
   spec.email         = ["ryota.arai@gmail.com"]
   spec.summary       = %q{RSS Watcher for Ruboty Chatbot}
-  spec.homepage      = "https://github.com/ruboty-rss"
+  spec.homepage      = "https://github.com/ryotarai/ruboty-rss"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
