@@ -1,24 +1,19 @@
 # Ruboty::Rss
 
-TODO: Write a gem description
-
 ## Installation
 
-Add this line to your application's Gemfile:
+In Gemfile:
 
-    gem 'ruboty-rss'
+```
+gem 'ruboty'
+gem 'ruboty-rss'
+```
 
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install ruboty-rss
+If you would like to set interval of checking feeds, set `RUBOTY_RSS_INTERVAL` envvar in seconds.
 
 ## Usage
 
-TODO: Write usage instructions here
+See `ruboty help`.
 
 ## Contributing
 
