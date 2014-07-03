@@ -6,7 +6,7 @@ module Ruboty
       DEFAULT_INTERVAL = 60 * 15
       NAMESPACE = "rss"
 
-      on(/subscribe rss (?<url>.+)/, name: "subscribe", description: "Subscribe a new RSS feed")
+      on(/subscribe rss (?<urls>.+)/, name: "subscribe", description: "Subscribe a new RSS feed (multiple urls with ',' separator)")
       on(/unsubscribe rss (?<id>.+)/, name: "unsubscribe", description: "Unsubscribe a new RSS feed")
       on(/list rss feeds/, name: "list", description: "List watching RSS feeds")
 
@@ -17,17 +17,20 @@ module Ruboty
       end
 
       def subscribe(message)
-        feed = Ruboty::Rss::Feed.new(
-          message.original.except(:robot).merge(
-            id: generate_id,
-            url: message[:url],
+        urls = message[:urls].split(',')
+        urls.each do |url|
+          feed = Ruboty::Rss::Feed.new(
+            message.original.except(:robot).merge(
+              id: generate_id,
+              url: url,
+            )
           )
-        )
 
-        feeds[feed.id] = feed
-        feed_data[feed.id] = feed.attributes
+          feeds[feed.id] = feed
+          feed_data[feed.id] = feed.attributes
+        end
 
-        message.reply("Subscribed.")
+        message.reply("#{urls.size} feed(s) subscribed.")
       end
 
       def unsubscribe(message)
