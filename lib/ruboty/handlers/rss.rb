@@ -75,7 +75,9 @@ module Ruboty
         Thread.start do
           while true
             feeds.each_pair do |id, feed|
+              debug "Fetching RSS feed (#{feed.url})"
               feed.new_items.each do |item|
+                debug "New item found (#{item.title} / #{item.link})"
                 body = "New Entry: #{item.title}\n#{item.link}"
                 Message.new(
                   feed.attributes.symbolize_keys.except(:url, :id).merge(robot: robot)
@@ -92,6 +94,12 @@ module Ruboty
           id = rand(1000)
         end while feeds.has_key?(id)
         id
+      end
+
+      private
+      
+      def debug(str)
+        Ruboty.logger.debug("[#{Time.now.to_s}] ruboty-rss: #{str}")
       end
     end
   end
